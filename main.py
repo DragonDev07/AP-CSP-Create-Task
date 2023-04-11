@@ -3,10 +3,11 @@ import json
 dictionary = []
 matching_words = []
 
-def search_word(length, char):
+# Function that searches for word using parameters which are the user's input
+def search_word(length, char, length_letters):
     for word in dictionary:
         if len(word) == length:
-            if word[-1] == char:
+            if word[-length_letters::] == char:
                 matching_words.append(word)
 
 # Welcome the user!
@@ -19,15 +20,17 @@ print("-------------------------------------------------------------------------
 
 # Get the users input for length and ending letter
 user_length = int(input("Enter Length of words to search for: "))
-ending_with = input("Enter a latter that the words will end with (ex. 'a'): ")
+ending_with = input("Enter a (or multiple) latter(s) that the words will end with (ex. 'a' or 'abc'): ")
 ending_with = ending_with.lower() # Make sure the ending letter value is lowercase so that the dict doesnt mess up, even if the user enters caps.
+print("--------------------------------------------------------------------------------------------------")
+print("Words: ")
 
 # Get Dictionary from Json file and make it a list (dictionary)
 with open('dict.json', 'r') as f:
     dictionary = json.loads(f.read())
 
 # Call search_word function to search for matching words
-search_word(user_length, ending_with)
+search_word(user_length, ending_with, len(ending_with))
 
 # Check if the length of the matching words list is 0, if it is, print no matching words.
 if len(matching_words) == 0:
