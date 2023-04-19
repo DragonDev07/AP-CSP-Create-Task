@@ -1,7 +1,8 @@
 import json
 
-dictionary = []
 matching_words = []
+
+dictionary = []
 
 # Get Dictionary from Json file and make it a list (dictionary)
 with open('dict.json', 'r') as f:
